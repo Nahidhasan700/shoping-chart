@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="handlePrice(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="addNum" type="text" class="form-control text-center" value="1">
+                           <button onclick="handlePrice(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5 id="price">$1219</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <!-- <button id="minusBtnMinus" class="btn btn-default"><i class="fas fa-minus"></i></button> -->
+                           <button onclick="handlePriceCase(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="subAmount" type="text" class="form-control text-center" value="1">
+                           <!-- <button id="minisBtn" class="btn btn-default"><i class="fas fa-plus"></i></button> -->
+                           <button onclick="handlePriceCase(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5 id="dicressPrice">$59</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5 >Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5 id="total-price">$1,278</h5>
+                        <h5 id="tex-amount">$0</h5>
+                        <h5 id="grand-total">$1,278</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+<!-- js  -->
+<!-- btn  -->
+                  <script>
+                     //  document.getElementById('addBtn').addEventListener('click',function(){
+                     //   handlePrice(true);
+                     //  });
+                     //  document.getElementById('minusBtn').addEventListener('click',function(){
+                     //   handlePrice(false);
+                     //  });
+
+                     // onclick use kora kora jabe ake code ty onclik use korc 
+                     //  function handlePrice(isIncrese){
+                     //    let addNumber = document.getElementById('addNum');
+                     //    let changeNum = parseInt(addNumber.value);
+                     //    // let newchange = changeNum - 1;
+                     //    let newchange = changeNum;
+                     //    if(isIncrese == true){
+                     //       newchange = changeNum + 1;
+                     //    }
+                     //    if(isIncrese == false && changeNum > 0){
+                     //       newchange = changeNum - 1;
+                     //    }
+                     //    addNumber.value = newchange;
+                     //    let totalPrice = newchange * 1219 ; 
+                     //    document.getElementById('price').innerText = '$ ' + totalPrice;
+                     //  }
+                      function handlePrice(isIncrese){
+                        let addNumber = document.getElementById('addNum');
+                        let changeNum = parseInt(addNumber.value);
+                        // let newchange = changeNum - 1;
+                        let newchange = changeNum;
+                        if(isIncrese == true){
+                           newchange = changeNum + 1;
+                        }
+                        if(isIncrese == false && changeNum > 0){
+                           newchange = changeNum - 1;
+                        }
+                        addNumber.value = newchange;
+                        let totalPrice = newchange * 1219 ; 
+                        document.getElementById('price').innerText = '$ ' + totalPrice;
+                        calculateTotal();
+                      }
+//casin btn handeler 
+
+                      function handlePriceCase(isDecress){
+                        let addNumber = document.getElementById('subAmount');
+                        let changeNum = parseInt(addNumber.value);
+                        // let newchange = changeNum - 1;
+                        let newchange = changeNum;
+                        if(isDecress == true){
+                           newchange = changeNum + 1;
+                        }
+                        if(isDecress == false && changeNum > 0){
+                           newchange = changeNum - 1;
+                        }
+                        addNumber.value = newchange;
+                        let totalPrice = newchange * 59 ; 
+                        document.getElementById('dicressPrice').innerText = '$ ' + totalPrice;
+                        calculateTotal();
+                      }
+
+//subtotal er kaj korc 
+                      function calculateTotal(){
+                        let phoneCal = document.getElementById('addNum');
+                        let phoneCoun = parseInt(phoneCal.value);
+
+                        let caseCal = document.getElementById('subAmount');
+                        let caseCoun = parseInt(caseCal.value);
+                        
+                        let totalPriceChart = phoneCoun * 1219 + caseCoun * 59;
+
+                        document.getElementById('total-price').innerText = '$ ' + totalPriceChart;
+
+                        let tax =Math.round(totalPriceChart * 0.1);
+                        document.getElementById('tex-amount').innerText ='$ ' + tax ;
+
+                        let allAmount = totalPriceChart * tax;
+                        document.getElementById('grand-total').innerText ='$ ' + allAmount ;
+
+
+
+                      }
+
+
+
+
+                      //addEventListener diya o kora jabe oita o likc 
+
+                     //  document.getElementById('addBtn').addEventListener('click',function(){
+                     //    let addNumber = document.getElementById('addNum');
+                     //    let changeNum = parseInt(addNumber.value);
+                     //    let newchange = changeNum + 1;
+                     //    addNumber.value = newchange;
+                     //    let totalPrice = newchange * 1219 ; 
+                     //    document.getElementById('price').innerText = '$ ' + totalPrice;
+                     //  });
+                     //  document.getElementById('minusBtn').addEventListener('click',function(){
+                     //    let addNumber = document.getElementById('addNum');
+                     //    let changeNum = parseInt(addNumber.value);
+                     //    let newchange = changeNum - 1;
+                     //    addNumber.value = newchange;
+                     //    let totalPrice = newchange * 1219 ; 
+                     //    document.getElementById('price').innerText = '$ ' + totalPrice;
+                     //  });
+
+
+
+                     //casin btn handeler 
+                     // document.getElementById('minisBtn').addEventListener('click',function(){
+                     //    let minusNumber = document.getElementById('subAmount');
+                     //    let changeNumber = parseInt(minusNumber.value);
+                     //    let newChangeNumber = changeNumber + 1;
+                     //    minusNumber.value = newChangeNumber;
+                     //    let totalPrice = newChangeNumber * 59;
+                     //    document.getElementById('dicressPrice').innerText = '$ ' + totalPrice;
+
+                     // });
+                     // document.getElementById('minusBtnMinus').addEventListener('click',function(){
+                     //    let numberMinus = document.getElementById('subAmount');
+                     //    let numberChange = parseInt(numberMinus.value);
+                     //    let changeNumberNew = numberChange - 1 ; 
+                     //    numberMinus.value = changeNumberNew;
+                        
+                     //    let totalPrice = changeNumberNew * 59; 
+                       
+                     //    document.getElementById('dicressPrice').innerText = '$ '+ totalPrice ;
+
+                     // });
+
+
+                     
+                     // function handlePriceCase(isDecress){
+                     //    let addNumber = document.getElementById('subAmount');
+                     //    let changeNum = parseInt(addNumber.value);
+                     //    // let newchange = changeNum - 1;
+                     //    let newchange = changeNum;
+                     //    if(isDecress == true){
+                     //       newchange = changeNum + 1;
+                     //    }
+                     //    if(isDecress == false && changeNum > 0){
+                     //       newchange = changeNum - 1;
+                     //    }
+                     //    addNumber.value = newchange;
+                     //    let totalPrice = newchange * 59 ; 
+                     //    document.getElementById('dicressPrice').innerText = '$ ' + totalPrice;
+                     //  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     
+                  </script>
+
+
+
+
+</body>
+
+</html>
